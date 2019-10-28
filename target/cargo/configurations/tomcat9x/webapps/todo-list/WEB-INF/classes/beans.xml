@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+    <bean id="demoService" class="academy.learnprogramming.DemoServiceImpl">
+        <constructor-arg ref="demoService"/>
+    </bean>
+    <!--default-init-method="reset"> ****ADDS INIT METHOD TO EVERY BEAN*****-->
+
+    <!--LEGEND-->
+    <!--NAME = NAME OF PROPERTY(FIELD) IN A CLASS-->
+    <!--REF = REFERENCE TO OTHER BEAN-->
+    <!--<bean id="interfaceName" class="classPathToImplementerOfInterface"-->
+
+
+    <!--<context:component-scan base-package="academy.learnprogramming"/>-->
+
+
+    <!--********all beans are now annotated components*****-->
+    <!--<bean id="numberGenerator" class="academy.learnprogramming.NumberGeneratorImpl"/>-->
+
+    <!--******GENERATE BEAN AND USE CONSTRUCTOR OR SETTER BASED DEP INJ*****-->
+    <!--<bean id="game" class="academy.learnprogramming.GameImpl" init-method="reset">-->
+
+    <!--********constructor dep inj initialize*******-->
+    <!--<constructor-arg ref="numberGenerator"/>-->
+
+    <!--********setter based dep inj. using @AutoWired instead*******-->
+    <!--<property name="numberGenerator" ref="numberGenerator"/>-->
+    <!--</bean>-->
+
+
+    <!--********Handler for postConstruct and preDestroy annotations. replaced by annotation-config(@Autowired)********-->
+    <!--<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>-->
+
+    <!--********replaced by component-scan********-->
+    <!--<context:annotation-config/>-->
+
+</beans>

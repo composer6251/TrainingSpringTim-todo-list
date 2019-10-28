@@ -1,5 +1,7 @@
-academy\learnprogramming\controller\DemoController.class
 Main.class
 academy\learnprogramming\config\WebConfig.class
+academy\learnprogramming\service\DemoService.class
+academy\learnprogramming\controller\DemoController.class
+academy\learnprogramming\service\DemoServiceImpl.class
 InterfaceTest.class
 academy\learnprogramming\config\WebAppInitializer.class

@@ -1,11 +1,12 @@
 package academy.learnprogramming.controller;
 
+import academy.learnprogramming.service.DemoService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /*******Handler Mapping*********
  * 1 Request to dispatcher ->
@@ -25,21 +26,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class DemoController {
 
+    private final DemoService demoService;
 
-    // http://localhost:8080/todo-list/hello
-    @ResponseBody
-    @GetMapping("/hello")
-    public String hello (){
-
-        // prefix + name + suffix (WEB-INF/view/hello.jsp)
-        return "hello";
+    //Constructor
+    @Autowired
+    public DemoController(DemoService demoService) {
+        this.demoService = demoService;
     }
+
+    /**REQUEST METHODS***/
+    // http://localhost:8080/todo-list/hello
+//    @ResponseBody
+//    @GetMapping("/hello")
+//    public String hello (){
+//
+//        // prefix + name + suffix (WEB-INF/view/hello.jsp)
+//        return "hello";
+//    }
 
     // http://localhost:8080/todo-list/welcome
     @GetMapping("welcome")
     public String welcome(Model model){
+        log.info("demoService = {}", demoService);
 
-        model.addAttribute("user", "David");
+        model.addAttribute("helloMessage", demoService.getHelloMessage("David"));
         log.info("model = {}", model);
         // prefix + name + suffix (WEB-INF/view/welcome.jsp)
         return "welcome";
@@ -49,7 +59,7 @@ public class DemoController {
     public String welcomeMessage(){
 
         log.info("welcomeMessage() called");
-        return "Welcome to this Demo App";
+        return demoService.getWelcomeMessage();
     }
 
 
