@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /*******Handler Mapping*********
  * 1 Request to dispatcher ->
@@ -26,9 +27,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @Controller
 public class DemoController {
 
+    //== Dependency (helper object)
     private final DemoService demoService;
 
-    //Constructor
+    //== Constructor Dependency Injection
     @Autowired
     public DemoController(DemoService demoService) {
         this.demoService = demoService;
@@ -45,11 +47,13 @@ public class DemoController {
 //    }
 
     // http://localhost:8080/todo-list/welcome
+    // http://localhost:8080/todo-list/welcome?user=David
     @GetMapping("welcome")
-    public String welcome(Model model){
+    public String welcome(@RequestParam String user, @RequestParam int age, Model model){
         log.info("demoService = {}", demoService);
 
-        model.addAttribute("helloMessage", demoService.getHelloMessage("David"));
+        model.addAttribute("age", age);
+        model.addAttribute("helloMessage", demoService.getHelloMessage(user));
         log.info("model = {}", model);
         // prefix + name + suffix (WEB-INF/view/welcome.jsp)
         return "welcome";
@@ -72,12 +76,12 @@ public class DemoController {
 //    }
 //
 
-    //@GetMapping("test")
-//    public String test(Model model){
-//
-//        model.addAttribute("user", "David");
-//        log.info("model = {}", model);
-//        // prefix + name + suffix (WEB-INF/view/welcome.jsp)
-//        return "test";
-//    }
+    @GetMapping("test")
+    public String test(Model model){
+
+        model.addAttribute("user", "David");
+        log.info("model = {}", model);
+        // prefix + name + suffix (WEB-INF/view/test.jsp)
+        return "test";
+    }
 }

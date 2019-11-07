@@ -1,5 +1,6 @@
 package academy.learnprogramming.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = "academy.learnprogramming")
+@Slf4j
 public class WebConfig {
 
     //
@@ -24,6 +26,8 @@ public class WebConfig {
         UrlBasedViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix(RESOLVER_PREFIX);
         viewResolver.setSuffix(RESOLVER_SUFFIX);
+
+        log.info("viewResolver = {}", viewResolver);
 
         return viewResolver;
     }
